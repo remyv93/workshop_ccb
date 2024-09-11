@@ -68,6 +68,35 @@ gbif_clean <-
   coord_impossible() |> 
   coord_unlikely()
 
+# save data ---------------------------------------------------------------
+
+gbif_clean |> 
+  write_csv('data/processed/gbif_clean.csv')
+
 # create derived dataset --------------------------------------------------
 
+# https://www.gbif.org/derived-dataset/about)
 
+derived_data <-
+  gbif_clean |>
+  summarize(
+    n = n(),
+    .by = datasetKey)
+
+# test derived dataset
+   
+derived_dataset_prep(
+  citation_data = derived_data,
+  title = 'Derived Dataset Pseudacris crucifer',
+  description = 'This data was filtered using CoordinateCleaner and scrubr',
+  source_url = 'https://github.com/hzumbado/workshop_purdue/blob/main/data/processed/gbif_clean.csv',
+  gbif_download_doi = '10.15468/dl.gc8349')
+
+# If output looks ok, run derived_dataset 
+
+derived_dataset(
+  citation_data = derived_data,
+  title = 'Derived Dataset Pseudacris crucifer',
+  description = 'This data was filtered using CoordinateCleaner and scrubr',
+  source_url = 'https://github.com/hzumbado/workshop_purdue/blob/main/data/processed/gbif_clean.csv',
+  gbif_download_doi = '10.15468/dl.gc8349')

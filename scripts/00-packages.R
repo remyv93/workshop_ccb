@@ -5,7 +5,6 @@
 
 rm(list = ls())
 
-
 ipak <- 
   function(pkg){
     new.pkg <- 
@@ -22,6 +21,7 @@ packages <-
     'rgbif',
     'CoordinateCleaner',
     'tmap',
+    'tmaptools',
     'sf',
     'terra',
     'remotes')

@@ -1,6 +1,8 @@
 
 # setup -------------------------------------------------------------------
 
+rm(list = ls())
+
 library(rgbif)
 library(tidyverse)
 
@@ -21,13 +23,14 @@ gbif_download |>
 
 occ_download_wait(gbif_download)
 
-d <- 
+data <- 
   occ_download_get(
     gbif_download, 
     path = 'data/raw', 
     overwrite = TRUE) |> 
   occ_download_import()
 
-d |> 
-  write_csv('data/raw/pseudacris_gbif_raw.csv')
+# save data ---------------------------------------------------------------
 
+data |> 
+  write_csv('data/raw/pseudacris_gbif_raw.csv')
