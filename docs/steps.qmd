@@ -1,0 +1,82 @@
+---
+title: "Preworkshop steps"
+author: "Hector Zumbado"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    toc-expand: false
+editor: visual
+---
+
+## Software
+
+Please download the last versions of
+
+1.  [Git](https://git-scm.com/download/)
+2.  [R](https://cran.rstudio.com/)
+3.  [RStudio](https://posit.co/download/rstudio-desktop/)
+
+## Packages
+
+1.  Copy the following code and install the following packages in RStudio
+
+```{r}
+#| output: false
+
+ipak <- 
+  function(pkg){ 
+    new.pkg <- 
+      pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+      install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)}
+
+# usage
+packages <- 
+  c(
+    'renv',
+    'rmarkdown',
+    'rinat',
+    'tidyverse', 
+    'rgbif',
+    'tmap',
+    'sf',
+    'terra')
+
+ipak(packages)
+```
+
+## Account
+
+Open accounts and set profile
+
+1.  [GitHub](https://github.com/)
+
+2.  [GBIF](https://www.gbif.org/)
+
+3.  [INaturalist](https://www.inaturalist.org/)
+
+We will create maps map for the spring pepper (*Pseudacris crucifer*) <https://inherpatlas.org/species/pseudacris_crucifer>
+
+1- Distribution in US
+
+2- Distribution in Indiana
+
+Create a folder named Purdue workshop
+
+Create a subfolder downloads
+
+Download Digital Elevation Model [(DEM)](https://www.earthenv.org/topography). Use the following settings
+
+![](dem_settings.jpg){fig-align="left"}
+
+## Resources
+
+1.  [rgbif](https://docs.ropensci.org/rgbif/articles/rgbif.html)
+
+2.  [scrubr](https://rdrr.io/github/ropensci/scrubr/)
+
+3.  [CoordinateCleaner](https://ropensci.github.io/CoordinateCleaner/articles/Cleaning_GBIF_data_with_CoordinateCleaner.html)
+
+4.  

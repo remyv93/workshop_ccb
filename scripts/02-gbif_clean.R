@@ -1,0 +1,73 @@
+
+# setup -------------------------------------------------------------------
+
+rm(list = ls())
+
+library(CoordinateCleaner)
+library(scrubr)
+library(rgbif)
+library(tidyverse)
+
+# data --------------------------------------------------------------------
+
+gbif_raw <-  
+  read_csv('data/raw/pseudacris_gbif_raw.csv')
+
+gbif_pre_clean <- 
+  gbif_raw |> 
+  select(
+    id = gbifID,
+    datasetKey,
+    species, 
+    status = occurrenceStatus,
+    x = decimalLongitude,
+    y = decimalLatitude,
+    accuracy = coordinateUncertaintyInMeters,
+    year = year, 
+    institution = institutionCode)
+
+gbif_pre_clean2 <- 
+  gbif_pre_clean |>
+  filter(
+    !if_any(
+      c(
+        x, 
+        y, 
+        accuracy, 
+        year), 
+      is.na)) |>  
+  filter(x < 0, y > 0) |> 
+  filter(  
+    status == 'PRESENT',
+    institution != 'iNaturalist',
+    year >= 1980,
+    accuracy <= 5000) |> 
+  select(
+    id:species,
+    x:institution) |> 
+  mutate(source = 'gbif') |> 
+  distinct(x, y, year, .keep_all = TRUE)
+
+gbif_clean <- 
+  gbif_pre_clean2 |>
+  clean_coordinates(
+    lon = 'x',
+    lat = 'y',
+    tests = c(
+      "capitals", 
+      "centroids",
+      "equal", 
+      "gbif", 
+      "institutions", 
+      "outliers", 
+      "seas", 
+      "zeros"),
+    value = 'clean') |> 
+  coord_incomplete() |> 
+  coord_imprecise() |> 
+  coord_impossible() |> 
+  coord_unlikely()
+
+# create derived dataset --------------------------------------------------
+
+
