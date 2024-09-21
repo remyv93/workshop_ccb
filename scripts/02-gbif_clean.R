@@ -35,7 +35,7 @@ gbif_pre_clean2 <-
         y, 
         accuracy, 
         year), 
-      is.na)) |>  
+      ~ is.na(.x))) |>  
   filter(x < 0, y > 0) |> 
   filter(  
     status == 'PRESENT',

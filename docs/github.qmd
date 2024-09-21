@@ -1,0 +1,56 @@
+---
+title: "Set GitHub in RStudio"
+author: "Hector Zumbado"
+format: 
+  html:
+    embed-resources: true
+editor: visual
+---
+
+GitHub
+
+GitHub allows users to build data repositories and track changes using git (version control). Every time changes are committed, GitHub creates a snapshot.
+
+Process:
+
+1- Work on your document/files
+
+2- Stage changes
+
+3- Commit (add a useful message)
+
+## Steps
+
+Make sure to have an account on GitHub
+
+1.  Open RStudio and configure global tools to work with Git. Follow instructions
+
+2.  Configure terminal (tools/global_options/terminal)
+
+    ![](terminal_config.jpg)
+
+3.  Generate ssh key and add to GitHub (optional but highly recommended)
+
+4.  Open new terminal and run the following lines
+
+git --version
+
+git config --global --list
+
+git config --global init.defaultBranch main
+
+git config --global core.autocrlf true
+
+git config --global user.email "email" #add private GitHub email
+
+git config --global user.name "username" #add Github username
+
+If you added ssh key run the following lines
+
+`-T git@github.com`
+
+Confirm fingerprint
+
+New project (git_start). Check Git Box
+
+1.  

@@ -1,0 +1,268 @@
+---
+title: Purdue Workshop
+author: Hector Zumbado-Ulate
+format:
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Class notes
+
+### 1) Useful commands in RStudio
+
+Run the following code. Check library paths also when you activate '***renv'***
+
+```{r useful code}
+#| output: false
+
+R.Version() #current R version.
+
+packageVersion('base') #current package version.
+
+sessionInfo() #current session data.
+
+search() #list of attached objects.
+
+.libPaths() #Libraries where packages are stored.
+
+```
+
+**Demo1:** Create project from terminal
+
+GitHub account must be previously linked to R
+
+1- New project 'Demo_1'
+
+2- Configure project options. Click on project name (viewer/explorer pane)
+
+### Project options:
+
+-   Restore .Rdata: No
+
+-   Save workspace: No (Never save the environment)
+
+-   Save history: default
+
+3- Configure R
+
+## Display tab
+
+-   show margins
+-   show white space
+
+## Diagnostics (within display data)
+
+-   Enable all diagnostics
+
+## 
+
+# Folder structure
+
+1- Data
+
+2- Outputs
+
+3- Manuscript
+
+### RENV
+
+# Install/packages(renv)
+
+# useful commands
+
+-   `renv:init`
+
+-   `.libPaths()`
+
+-   `renv::install(‘package@version’)`
+
+-   `renv::status`: shows lockfile status
+
+-   `renv::snapshot`: updates lockfiles
+
+-   `renv::clean()`: suggest packages might be removed
+
+-   `renv:::graph()`: shows main packages and dependencies (project structure)
+
+### Advice:
+
+-   create r script with dependencies. Go files, new blank file, r scrip, write libraries
+
+-   Some commands can be added to the rprofile if renv is not downloading
+
+1- `Sys.setenv(RENV_DOWNLOAD_FILE_METHOD = "libcurl")`
+
+## Day 3
+
+### Configure Git. Must be installed
+
+-   Staging: before committing
+
+-   Commit: make a snapshot
+
+Set account on github.com
+
+-   Open an account
+
+-   Settings: set email as private. Copy 'private email'
+
+1- Create project. Project options: no, no, default
+
+2- Code editing: check all. Line ending conversion: Platform native (avoids conflict with Linus, and Mac)
+
+3- Work with terminal. Go to global options, terminal (Git Bash)
+
+4- Tools. Terminal and open new terminal
+
+5- Configure git settings and initialize repository and commit project changes (see below)
+
+6- Restart session. Look for .gitignore file in project files (projects we don't want to track). Open file and see files. .gitignore can be used for compendium. We can add the output
+
+7- Add and commit .gitignore file. Check with git status
+
+8- Create readme file in the terminal (see below)
+
+9- Check preview to see readme file on the viewer panel
+
+10- Add .html (or \*.html) on .gitignore to ignore (all) html files.
+
+11- Check git status. Add and commit .gitignore read.me file
+
+## Connect repository with GitHub using R studio
+
+1- Tools. Global options. Git. SSH.
+
+2- Create SHH key. Close pop-up
+
+3- view and copy public key
+
+4- Go to GitHub. Settings. SSH and GPG keys. New SSH. Paste key, name it and click on `Add SSH key`. Confirm
+
+5- confirm connection with ssh `-T git@github.com`
+
+6- Confirm `key fingerprint` (security step)
+
+7- Create an empty repository in GitHub. Profile. Repositories. New (same name of R project). Set public or private
+
+8- Copy SSH from quick setup tab
+
+9- Check all changes have been committed
+
+10- Add remote connection with `git remote add <name> <SSH-url>` `git remote add origin git@github.com:hzumbado/git-sb.git` for me
+
+11- Check connection with `git remote -v`
+
+12- Push repository with `git push -u origin main`
+
+13- go to github and check repository
+
+14- For practice, edit readme file and commit changes
+
+15- To update in my computer I use `git remote update` and `git pull`
+
+16- Check continuously with `git status` and `git log –oneline`
+
+# Git commands:
+
+`clear`: to clear terminal
+
+`git –version`: get git version
+
+`git config --global init.defaultBranch main`: to set a main branch (directory)
+
+`git config --global –list`: to see list of items/configuration
+
+`git config --global core.autocrlf true`
+
+`git config --global user.email "116983628+hzumbado@users.noreply.github.com"`: set private email
+
+`git config --global user.name "hzumbado"`: set username
+
+`git init`: initialize repo
+
+`git status`: see untracked changes
+
+`git add <filename>`: put in the staging area
+
+`git commit -m “<message>”`: message should be short and informative, for example first commit should be "Init repo"
+
+`git log`: provides the history of changes
+
+`git log –oneline`: summarized history of changes
+
+`git diff`: shows original settings and new changes
+
+`ssh -T git@github.com`: validate ssh key
+
+`git remote add <name> <SSH-url>`: connect remotely with GitHub repository
+
+`git remote -v`: check remote connection
+
+`git push -u origin main`: push repository to GitHub
+
+`git remote update`
+
+`git pull`
+
+### Readme.file
+
+touch README.md
+
+# Git sandbox
+
+This repository is used to test Git functionality.
+
+## Day 4
+
+# Cloning one of my repositories
+
+1- Go to GitHub repositories
+
+2- Click on code button
+
+3- Click on SSH and copy link
+
+4- Open R studio. New project from version control
+
+5- Select Git and copy link. Browse folder you want to create project
+
+6- Once the project is created, a git tab appears. It contains staged, status and path like in the terminal
+
+7- Edit readme file and save
+
+8- The change would appear in the `git` tab. Check it and `commit`
+
+9- `Commit` tab opens. Write a commit message and click on `commit` . Always check with `git status`
+
+10- use git -push to update repository on GitHub. Instead, I can click on `push` on the git tab. Refresh git to see updated repository
+
+To add collaborators, go to GitHub project settings, collaborators, use search bar and add. When I receive an invitation, I clone the repository in my computer.
+
+Branches are copies of the main branch, so they allow experimentation without affecting the main branch
+
+I do changes in a new branch and commit (but do not commit renv.lock) and sent a pull request: in GitHub, go to project and select green tab `Compare & pull request`. Then a window opens, and collaborator adds a comment for the commit message (for example after merge, please run `renv::snapshot()` to add dependencies to lock file. Then click on `Create pull request`. Now the request appears on project main menu. I can check the changes and commits. Changes can be reviewed with commentaries.
+
+Go `Conversation` tab and click on `Merge pull request`. In R studio write `git pull` to update changes in user computer. Finally go to terminal and use `git checkout main` and `git pull`
+
+# Create a new branch
+
+`git branch`: print all branches from repository
+
+`git branch <type(feature)/name> add feature. Example`git branch feature/choropleth\`
+
+`git checkout b <type(feature)/name>`: same but works faster
+
+`git checkout <type(feature)/name>` to move to new branch
+
+`git push -u origin /<type(feature)/name>`: to push changes
+
+`git log --oneline --graph`: shows the branches. See also `history` on git tab
+
+## Resources
+
+1.  [rgbif](https://docs.ropensci.org/rgbif/articles/rgbif.html)
+
+2.  [scrubr](https://rdrr.io/github/ropensci/scrubr/)
+
+3.  [CoordinateCleaner](https://ropensci.github.io/CoordinateCleaner/articles/Cleaning_GBIF_data_with_CoordinateCleaner.html)

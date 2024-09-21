@@ -9,15 +9,21 @@ format:
 editor: visual
 ---
 
+## GIS and Data Science Workshop
+
+This workshop is intended to show common methods used in ecology to download occurrence data, process and clean spatial data, create static and interactive maps, and create documents using RStudio. In addition, we will use GitHub to clone and upload repositories. Basic experience in R is preferred. The R code and examples will be provided by the instructor but the students are encouraged to bring their own data. Students can work individually or in pairs. Because this is a short workshop, we will see just a glimpse of ***Tidyverse***, ***sf*** and ***Terra*** functions; however classes are interactive and the students are free to ask for specific ways to analyze/clean data.
+
 ## Software
 
-Please download the last versions of
+Please download the latest versions of
 
 1.  [Git](https://git-scm.com/download/)
 2.  [R](https://cran.rstudio.com/)
 3.  [RStudio](https://posit.co/download/rstudio-desktop/)
 
-## Packages
+Important: You don't need to remove previous versions of R installed in your computer. Those are important for running isolated R projects. You can select the version you want to use in RStudio with Tools/global_options/General
+
+## 1) Packages
 
 1.  Copy the following code and install the following packages in RStudio
 
@@ -33,50 +39,80 @@ ipak <-
     sapply(pkg, require, character.only = TRUE)}
 
 # usage
+
 packages <- 
   c(
     'renv',
     'rmarkdown',
+    'quarto',
+    'janitor',
     'rinat',
     'tidyverse', 
     'rgbif',
+    'CoordinateCleaner',
     'tmap',
+    'tmaptools',
     'sf',
-    'terra')
+    'terra',
+    'remotes',
+    'usethis')
 
 ipak(packages)
+
+#other packages
+
+remotes::install_github("ropensci/scrubr")
+
 ```
 
-## Account
+## 2) Accounts
 
-Open accounts and set profile
+Open an account and set your profile in the following websites:
 
 1.  [GitHub](https://github.com/)
 
-2.  [GBIF](https://www.gbif.org/)
+2.  [GBIF](https://www.gbif.org/) (keep at hand your username, password, and email)
 
 3.  [INaturalist](https://www.inaturalist.org/)
 
-We will create maps map for the spring pepper (*Pseudacris crucifer*) <https://inherpatlas.org/species/pseudacris_crucifer>
+To set your GBIF account in RStudio please open RStudio and copy/run the following code. Make sure to have installed the package ***'usethis'*** in section1.
 
-1- Distribution in US
+```{r}
+#| output: false
 
-2- Distribution in Indiana
+rm(list = ls())
 
-Create a folder named Purdue workshop
+usethis::edit_r_environ()
 
-Create a subfolder downloads
+# This will open a tab with your R environment .Renviron
+# In that window copy the following lines and add your personal data
 
-Download Digital Elevation Model [(DEM)](https://www.earthenv.org/topography). Use the following settings
+GBIF_USER = '' # add your GBIF username
+GBIF_PWD = '' # add your GBIF password
+GBIF_EMAIL = '' # add your GBIF email
+
+# Run the code and restart RStudio after this
+
+```
+
+We will create different types of static and interactive maps map and graphs describing the distribution of the spring pepper (*Pseudacris crucifer*) <https://inherpatlas.org/species/pseudacris_crucifer> in the US and Indiana.
+
+Please
+
+1- Create a folder in your desktop named Purdue workshop
+
+2- Create a subfolder named downloads. Use the following links to:
+
+-   Download [world polygon](https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/?flg=en-us) Geographic file format/GeoJSON
+
+-   Download the following [US polygons:](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html)
+
+    -   County: cb_2018_us_county_500k.zip (11 MB)
+
+    -   States: cb_2018_us_state_500k.zip (3.2 MB)
+
+-   Download a global Digital Elevation Model [(DEM)](https://www.earthenv.org/topography). Use the following settings
 
 ![](dem_settings.jpg){fig-align="left"}
 
-## Resources
-
-1.  [rgbif](https://docs.ropensci.org/rgbif/articles/rgbif.html)
-
-2.  [scrubr](https://rdrr.io/github/ropensci/scrubr/)
-
-3.  [CoordinateCleaner](https://ropensci.github.io/CoordinateCleaner/articles/Cleaning_GBIF_data_with_CoordinateCleaner.html)
-
-4.  
+## 

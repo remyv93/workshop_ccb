@@ -15,7 +15,10 @@ ipak <-
 
 packages <- 
   c(
+    'renv',
     'rmarkdown',
+    'quarto',
+    'janitor',
     'rinat',
     'tidyverse', 
     'rgbif',
@@ -24,12 +27,11 @@ packages <-
     'tmaptools',
     'sf',
     'terra',
-    'remotes')
+    'remotes',
+    'usethis')
 
 ipak(packages)
 
 #other packages
 
 remotes::install_github("ropensci/scrubr")
-
-
