@@ -9,7 +9,7 @@ library(tidyverse)
 # data --------------------------------------------------------------------
 
 inat_pre_clean <- 
-  read_csv('data/raw/pseudacris_inat_raw.csv') |>
+  read_csv('data/raw/abronia_inat_raw.csv') |>
   select(
     id,
     species = scientific_name,
@@ -21,6 +21,7 @@ inat_pre_clean <-
   mutate(
     date = as_date(date),
     year = year(date), 
+    source = 'INaturalist',
     .before = date) |> 
   select(!date)
   
@@ -38,8 +39,7 @@ inat_pre_clean2 <-
   filter(  
     year >= 1980,
     accuracy <= 500,
-    coordinates_obscured == 'FALSE') |>
-  mutate(source = 'INaturalist') |> 
+    coordinates_obscured == 'FALSE')  |> 
   distinct(x, y, year, .keep_all = TRUE)
 
 inat_clean <- 
@@ -65,4 +65,4 @@ inat_clean <-
 # save data ---------------------------------------------------------------
 
 inat_clean |> 
-  write_csv('data/processed/inat_clean.csv')
+  write_csv('data/processed/abronia_inat_clean.csv')

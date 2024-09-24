@@ -7,6 +7,8 @@ library(tidyverse)
 
 # data --------------------------------------------------------------------
 
+#unzip shapefiles in shapefile folder. Keep the origin names
+
 # usa <- 
 #   read_sf('shapefiles/cb_2018_us_state_500k.shp') |>
 #   st_make_valid() |> 
@@ -36,7 +38,3 @@ plot(st_geometry(world))
 
 world |>
   write_sf('shapefiles/world.gpkg')
-
-
-
-

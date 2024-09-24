@@ -161,8 +161,9 @@ Set account on github.com
 
 15- To update in my computer I use `git remote update` and `git pull`
 
-16- Check continuously with `git status` and `git log –oneline`
+16- Check continuously with `git status` and `git log --oneline`
 
+17-  `git remote set-url origin git@github.com:user/repository.git` to change branch when cloning a repository
 # Git commands:
 
 `clear`: to clear terminal

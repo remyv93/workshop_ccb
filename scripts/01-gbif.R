@@ -9,7 +9,7 @@ library(tidyverse)
 # data --------------------------------------------------------------------
 
 key <- 
-  name_backbone("Pseudacris crucifer") |> 
+  name_backbone("Abronia villosa") |> 
   pull(usageKey)
 
 
@@ -17,11 +17,11 @@ gbif_download <-
   occ_download(
     pred("taxonKey", key),format = "SIMPLE_CSV")
 
+occ_download_wait(gbif_download)
+
 gbif_download |> 
   read_rds(
     file = "data/raw/key.rds")
-
-occ_download_wait(gbif_download)
 
 data <- 
   occ_download_get(
@@ -33,4 +33,4 @@ data <-
 # save data ---------------------------------------------------------------
 
 data |> 
-  write_csv('data/raw/pseudacris_gbif_raw.csv')
+  write_csv('data/raw/abronia_gbif_raw.csv')

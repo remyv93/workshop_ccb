@@ -12,13 +12,13 @@ library(tidyverse)
 
 inat_metadata <- 
   get_inat_obs(
-    query = 'Pseudacris crucifer', 
+    query = 'Abronia villosa', 
     meta = TRUE) |> 
   pluck('meta')
 
 inat_data <-
   get_inat_obs(
-    query = 'Pseudacris crucifer',
+    query = 'Abronia villosa',
     quality = 'research',
     geo = TRUE,
     maxresults = 10000,
@@ -27,5 +27,5 @@ inat_data <-
 
 # save data ---------------------------------------------------------------
 
-inat_data |> 
-  write_csv('data/raw/pseudacris_inat_clean.csv')
+inat_data |>   
+  write_csv('data/raw/abronia_inat_raw.csv')

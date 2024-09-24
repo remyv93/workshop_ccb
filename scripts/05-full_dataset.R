@@ -31,9 +31,9 @@ full_dataset <-
       select(!coordinates_obscured)) |> 
   mutate(
     across(
-      c(id, species, year, source),
+      c(id, species, source),
       ~ as_factor(.x)))
 
 full_dataset |> 
-  write_csv('data/processed/occs_clean.csv')
+  write_csv('data/processed/abronia_clean.csv')
 

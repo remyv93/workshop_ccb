@@ -11,7 +11,7 @@ library(tidyverse)
 # data --------------------------------------------------------------------
 
 gbif_raw <-  
-  read_csv('data/raw/pseudacris_gbif_raw.csv')
+  read_csv('data/raw/abronia_gbif_raw.csv')
 
 gbif_pre_clean <- 
   gbif_raw |> 
@@ -71,7 +71,7 @@ gbif_clean <-
 # save data ---------------------------------------------------------------
 
 gbif_clean |> 
-  write_csv('data/processed/gbif_clean.csv')
+  write_csv('data/processed/abronia_gbif_clean.csv')
 
 # create derived dataset --------------------------------------------------
 
@@ -87,16 +87,16 @@ derived_data <-
    
 derived_dataset_prep(
   citation_data = derived_data,
-  title = 'Derived Dataset Pseudacris crucifer',
-  description = 'This data was filtered using CoordinateCleaner and scrubr',
-  source_url = 'https://github.com/hzumbado/workshop_purdue/blob/main/data/processed/gbif_clean.csv',
-  gbif_download_doi = '10.15468/dl.gc8349')
+  title = 'Derived Dataset Abronia villosa',
+  description = 'This dataset was filtered using CoordinateCleaner and scrubr and shows the distribution of Abronia villosa from 1980-2024',
+  source_url = 'https://github.com/hzumbado/ccc_workshop/tree/main/data/processed/abronia_gbif_clean.csv',
+  gbif_download_doi = '10.15468/dl.449ysg')
 
 # If output looks ok, run derived_dataset 
 
 derived_dataset(
   citation_data = derived_data,
-  title = 'Derived Dataset Pseudacris crucifer',
-  description = 'This data was filtered using CoordinateCleaner and scrubr',
-  source_url = 'https://github.com/hzumbado/workshop_purdue/blob/main/data/processed/gbif_clean.csv',
-  gbif_download_doi = '10.15468/dl.gc8349')
+  title = 'Derived Dataset Abronia villosa',
+  description = 'This dataset was filtered using CoordinateCleaner and scrubr and shows the distribution of Abronia villosa from 1980-2024',
+  source_url = 'https://github.com/hzumbado/ccc_workshop/tree/main/data/processed/abronia_gbif_clean.csv',
+  gbif_download_doi = '10.15468/dl.449ysg')

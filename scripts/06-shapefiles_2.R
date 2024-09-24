@@ -11,7 +11,7 @@ library(tidyverse)
 
 world <- 
   read_sf('shapefiles/world.gpkg') |> 
-  st_make_valid()
+  st_make_valid() 
 
 list.files(
   'shapefiles',
@@ -25,27 +25,16 @@ list.files(
           crs = st_crs(world))) |> 
   list2env(.GlobalEnv)
 
-
-# maps --------------------------------------------------------------------
-
-usa |> 
-  ggplot() +
-  geom_sf()
-
-counties |> 
-  ggplot() +
-  geom_sf()
-
-
 # conterminous us ---------------------------------------------------------
 
-# usa |> 
-#   distinct(name) |> 
-#   pull()
+usa |>
+  distinct(name) |>
+  pull()
 
 usa_cont <- 
   usa |> 
-  filter(!name %in% c(
+  rename(state = name) |> 
+  filter(!state %in% c(
     'Hawaii', 
     'Alaska',
     'Guam',
@@ -54,36 +43,37 @@ usa_cont <-
     'Puerto Rico',
     'American Samoa'))
 
-# plot terra --------------------------------------------------------------
-
-terra::plot(terra::vect(usa_cont))
-
 # remove extra counties ---------------------------------------------------------
 
 counties_cont <- 
   counties |> 
   inner_join(
     usa_cont |>
-      select(state = name, geoid) |> 
+      select(state, geoid) |> 
       as_tibble(), 
     by = c('statefp' = 'geoid')) |>
   select(!geom.y) |> 
   relocate(state, .before = name)
 
-# counties_cont <- 
-#   counties |> 
+# counties_cont <-
+#   counties |>
 #   st_filter(
 #     usa_cont |>
-#       select(state = name),
+#       select(state),
 #     .predicate = st_intersects)
+
+# plot terra --------------------------------------------------------------
+
+plot(terra::vect(usa_cont))
 
 usa_cont |> 
   ggplot() +
   geom_sf()
 
-counties_cont |> 
-  ggplot() +
-  geom_sf()
+usa_cont |> 
+  tm_shape() + 
+  tm_borders() +
+  tm_fill('gray90')
 
 # save vector files -------------------------------------------------------
 
@@ -123,57 +113,60 @@ elevation <-
 
 plot(elevation)
 
-# elevation_usa <- 
-#   elevation |> 
-#   crop(
-#     usa_cont, 
-#     mask = TRUE)
+elevation_usa <-
+  elevation |>
+  crop(
+    usa_cont,
+    mask = TRUE)
+
+plot(elevation_usa)
 
 writeRaster(
   elevation_usa,
-  'rasters/elevation_usa.tif',
+  'rasters/processed/elevation_usa.tif',
   overwrite = TRUE)
 
-
 # maps --------------------------------------------------------------------
-
 
 plot(elevation_usa)
 plot(usa_cont, col = 'NA', border = 'white', add = TRUE)
 
-plot(vect(usa_cont[usa_cont$name == 'Indiana',]))
+plot(vect(usa_cont[usa_cont$state == 'California',]))
 
-# indiana <- usa_cont |>
-#   filter(name == 'Indiana') |>
-#   vect()
+california <- 
+  usa_cont |>
+  filter(state == 'California') |>
+  vect()
 
-indiana_counties <-
+california_counties <-
   counties_cont |> 
-  filter(state == 'Indiana') |> 
+  filter(state == 'California') |> 
   vect()
   
-plot(crop(elevation_usa, indiana, mask = TRUE))
-plot(indiana_counties, border = 'white', add = TRUE)
+plot(crop(elevation_usa, california, mask = TRUE))
+plot(california_counties, border = 'white', add = TRUE)
 
 plot(elevation_usa)
-plot(vect(usa_cont[usa_cont$name == 'Indiana',]), add = TRUE)
-plot(indiana_counties, border = 'white', add = TRUE)
+plot(vect(usa_cont[usa_cont$state == 'California',]), add = TRUE)
+plot(california_counties, border = 'white', add = TRUE)
 
-# elevation_usa |>
-#   # crop(indiana, mask = TRUE)
-#   tm_shape(raster.downsample = FALSE) +
-#   tm_grid(lines = FALSE) +
-#   tm_raster(
-#     title = 'Elevation (m)',
-#     palette = terrain.colors(500),
-#     style = 'cont') +
-#   tm_shape(
-#     usa_cont |>
-#       filter(name == 'Indiana'), is.master = T) +
-#   tm_borders() +
-#   tm_layout(
-#     legend.outside = TRUE,
-#     bg.color = 'lightblue')
+
+tm_shape(world) +
+  tm_polygons('gray') +
+  tm_shape(
+    elevation_usa |>
+      crop(california, mask = TRUE),
+    raster.downsample = FALSE) +
+  tm_grid(lines = FALSE) +
+  tm_raster(
+    title = 'Elevation (m)',
+    palette = terrain.colors(500),
+    style = 'cont') +
+  tm_shape(
+    usa_cont |>
+      filter(state == 'California'), is.master = T) +
+  tm_borders() +
+  tm_layout(
+    legend.outside = TRUE,
+    bg.color = 'lightblue')
   
-
-

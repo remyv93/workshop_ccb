@@ -11,39 +11,44 @@ We will create different static maps, interactive maps map and graphs describing
 
 Steps
 
-1.   Tutorial 1: how to create and configure R projects with '***renv***' (demonstration).
+1.  Tutorial 1: how to create and configure R projects with '***renv***' (demonstration).
 
-2.   Tutorial 2: Setup GBIF account in RStudio.
+2.  Tutorial 2: Set up GBIF account in RStudio.
 
-3.   Tutorial 3: Setup GitHub account in R studio. Use document 'Set GitHub in RStudio'.
+3.  Tutorial 3: Set up GitHub account in R studio. Use document 'Set GitHub in RStudio'.
 
 4.  how to create and configure R projects with '***renv***' from the terminal (demonstration).
 
 5.  Create new project in R studio using GitHub and renv boxes.
 
-    Create a new project in your workshop folder.
+    Create a new project in your workshop folder named demo1.
 
-    Check GitHub and renv boxes.
+    Check **GitHub** and **renv** boxes.
 
-    Copy and paste the structure script within your project. Run the script.
+    Copy and paste the 'structure' script within your project. Run the script.
 
-## Quarto
+    Open a new file and write library(rgbif).
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+    Save file as 00-download_data.
 
-## Running Code
+    Restart R project and install using renv.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+    Check renv::status() and create snapshop with renv::snapshot().
 
-```{r}
-1 + 1
-```
+    Create a project with the Demo1 name in GitHub
 
-You can add options to executable code like this
+    Link Rstudio and GitHub with SSH protocol.
 
-```{r}
-#| echo: false
-2 * 2
-```
+    Check remote connection and branch.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+    Stage, commit, and push repository to github.
+
+6.  Fork project <https://github.com/hzumbado/ccc_workshop>
+
+7.  Keep the same name
+
+8.  Clone project to your computer using the version control and SSH protocol
+
+9.  Save project (workshop folder)
+
+    Check remote connection and branch in the terminal
