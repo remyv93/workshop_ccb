@@ -50,7 +50,3 @@ If you added ssh key run the following lines
 `-T git@github.com`
 
 Confirm fingerprint
-
-New project (git_start). Check Git Box
-
-1.  

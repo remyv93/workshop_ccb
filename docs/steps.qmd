@@ -9,13 +9,13 @@ format:
 editor: visual
 ---
 
-## GIS and Data Science Workshop
+## GitHub Workshop
 
-This workshop is intended to show common methods used in ecology to download occurrence data, process and clean spatial data, create static and interactive maps, and create documents using RStudio. In addition, we will use GitHub to clone and upload repositories. Basic experience in R is preferred. The R code and examples will be provided by the instructor but the students are encouraged to bring their own data. Students can work individually or in pairs. Because this is a short workshop, we will see just a glimpse of ***Tidyverse***, ***sf*** and ***Terra*** functions; however classes are interactive and the students are free to ask for specific ways to analyze/clean data.
+This workshop is intended to show common methods used to clone and upload repositories on GitHub. We will use R code to download occurrence data, process and clean spatial data, create static and interactive maps, and create documents using RStudio. CCB folks can work individually or in pairs. We will see just a glimpse of ***Tidyverse***, ***sf*** and ***Terra*** functions; however feel to ask for specific ways to analyze/clean data.
 
 ## Software
 
-Please download the latest versions of
+Please use the links provoded to download the latest versions of
 
 1.  [Git](https://git-scm.com/download/)
 2.  [R](https://cran.rstudio.com/)
@@ -27,7 +27,7 @@ Important: You don't need to remove previous versions of R installed in your com
 
 1.  Copy the following code and install the following packages in RStudio
 
-```{r}
+```{r packages}
 #| output: false
 
 ipak <- 
@@ -75,7 +75,25 @@ Open an account and set your profile in the following websites:
 
 3.  [INaturalist](https://www.inaturalist.org/)
 
-To set your GBIF account in RStudio please open RStudio and copy/run the following code. Make sure to have installed the package ***'usethis'*** in section1.
+Please
+
+1- Create a folder in your desktop named CCB workshop
+
+2- Create a subfolder named downloads. Use the following links to:
+
+-   Download [world polygon](https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/?flg=en-us) Geographic file format/GeoJSON
+
+-   Download the following [US polygons:](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html)
+
+    -   County: cb_2018_us_county_500k.zip (11 MB)
+
+    -   States: cb_2018_us_state_500k.zip (3.2 MB)
+
+-   Download a global Digital Elevation Model [(DEM)](https://www.earthenv.org/topography). Use the following settings
+
+![](dem_settings.jpg){fig-align="left"}
+
+To set your GBIF account in RStudio please open RStudio and copy/run the following code. Make sure to have installed the package ***'usethis'*** in section1. **We will do this task during the workshop. Skip this.**
 
 ```{r}
 #| output: false
@@ -94,25 +112,3 @@ GBIF_EMAIL = '' # add your GBIF email
 # Run the code and restart RStudio after this
 
 ```
-
-We will create different types of static and interactive maps map and graphs describing the distribution of the spring pepper (*Pseudacris crucifer*) <https://inherpatlas.org/species/pseudacris_crucifer> in the US and Indiana.
-
-Please
-
-1- Create a folder in your desktop named Purdue workshop
-
-2- Create a subfolder named downloads. Use the following links to:
-
--   Download [world polygon](https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/?flg=en-us) Geographic file format/GeoJSON
-
--   Download the following [US polygons:](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html)
-
-    -   County: cb_2018_us_county_500k.zip (11 MB)
-
-    -   States: cb_2018_us_state_500k.zip (3.2 MB)
-
--   Download a global Digital Elevation Model [(DEM)](https://www.earthenv.org/topography). Use the following settings
-
-![](dem_settings.jpg){fig-align="left"}
-
-## 

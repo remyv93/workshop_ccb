@@ -185,11 +185,11 @@ Set account on github.com
 
 `git add <filename>`: put in the staging area
 
-`git commit -m “<message>”`: message should be short and informative, for example first commit should be "Init repo"
+`git commit -m --<message>`: message should be short and informative, for example first commit should be "Init repo"
 
 `git log`: provides the history of changes
 
-`git log –oneline`: summarized history of changes
+`git log --oneline`: summarized history of changes
 
 `git diff`: shows original settings and new changes
 
