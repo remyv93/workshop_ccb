@@ -85,26 +85,26 @@ counties_cont |>
 
 # maps --------------------------------------------------------------------
 
-# usa_cont |> 
-#   tm_shape() +
-#   tm_borders(col = 'white') +
-#   tm_polygons('darkgreen')
+usa_cont |>
+  tm_shape() +
+  tm_borders(col = 'white') +
+  tm_polygons('darkgreen')
 
-# tmap_options(max.categories = 49)  
+tmap_options(max.categories = 49)
 
-# usa_cont |>
-#   mutate(name = as_factor(name)) |> 
-#   tm_shape() +
-#   tm_grid(lines = FALSE) +
-#   tm_borders('white') +
-#   tm_fill(
-#     col = 'name',
-#     palette = 'Set2') + 
-#   tm_layout(
-#     legend.outside = TRUE,
-#     bg.color = 'gray80')
+usa_cont |>
+  mutate(state = as_factor(state)) |>
+  tm_shape() +
+  tm_grid(lines = FALSE) +
+  tm_borders('white') +
+  tm_fill(
+    col = 'state',
+    palette = 'Set2') +
+  tm_layout(
+    legend.outside = TRUE,
+    bg.color = 'gray80')
 
-# tmap_options_reset()
+tmap_options_reset()
 
 # rasters -----------------------------------------------------------------
 
@@ -121,15 +121,33 @@ elevation_usa <-
 
 plot(elevation_usa)
 
+
+slope <- 
+  terrain(elevation_usa, "slope", unit="radians")
+
+plot(slope)
+
+aspect <- 
+  terrain(elevation_usa, "aspect", unit="radians")
+
+hillshade_usa <- shade(slope, aspect, 40, 270)
+
+plot(hillshade_usa, col = grey(0:100/100), legend = FALSE)
+plot(elevation_usa, col = terrain.colors(25, alpha = 0.35), add = TRUE)
+
+
 writeRaster(
   elevation_usa,
   'rasters/processed/elevation_usa.tif',
   overwrite = TRUE)
 
-# maps --------------------------------------------------------------------
+writeRaster(
+  elevation_usa,
+  'rasters/processed/hillshade_usa.tif',
+  overwrite = TRUE)
 
-plot(elevation_usa)
-plot(usa_cont, col = 'NA', border = 'white', add = TRUE)
+
+# maps --------------------------------------------------------------------
 
 plot(vect(usa_cont[usa_cont$state == 'California',]))
 
@@ -143,21 +161,30 @@ california_counties <-
   filter(state == 'California') |> 
   vect()
   
-plot(crop(elevation_usa, california, mask = TRUE))
-plot(california_counties, border = 'white', add = TRUE)
+plot(
+  crop(hillshade_usa, california, mask = TRUE), 
+  col = grey(0:100/100), legend = FALSE)
 
-plot(elevation_usa)
-plot(vect(usa_cont[usa_cont$state == 'California',]), add = TRUE)
+plot(crop(elevation_usa, california, mask = TRUE))
+
 plot(california_counties, border = 'white', add = TRUE)
 
 
 tm_shape(world) +
+  tm_grid(lines = FALSE) +
   tm_polygons('gray') +
+  tm_shape(
+    hillshade_usa %>%
+      mask(california)) +
+  tm_grid(lines = FALSE) +
+  tm_raster(
+    palette = gray(0:100 / 100),
+    n = 100,
+    legend.show = FALSE) +
   tm_shape(
     elevation_usa |>
       crop(california, mask = TRUE),
     raster.downsample = FALSE) +
-  tm_grid(lines = FALSE) +
   tm_raster(
     title = 'Elevation (m)',
     palette = terrain.colors(500),

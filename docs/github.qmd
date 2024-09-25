@@ -47,6 +47,6 @@ git config --global user.name "username" #add Github username
 
 If you added ssh key run the following lines
 
-`-T git@github.com`
+`ssh -T git@github.com`
 
 Confirm fingerprint

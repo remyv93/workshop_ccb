@@ -1,13 +1,17 @@
 ---
 title: "Workshop"
 author: "Hector Zumbado"
-format: html
+format: 
+  html:
+    embed-resources: true
 editor: visual
 ---
 
 ## Goal
 
-We will create different static maps, interactive maps map and graphs describing the distribution of the desert sand verbena ([*Abronia villosa*](https://www.calflora.org/app/taxon?crn=21)) in the US, California, and Riverside County.
+We will create different static and interactive maps describing the distribution of the desert sand verbena ([*Abronia villosa*](https://www.calflora.org/app/taxon?crn=21)) in the US, California, and Riverside County.
+
+![Desert sand verbena (*Abronia villosa*, Nyctaginacee)](abronia.jpg){width="500"}
 
 Steps
 
