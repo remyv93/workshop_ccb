@@ -68,8 +68,8 @@ tm_shape(occs_sf) +
 
 # map 1 -------------------------------------------------------------------
 
-tmap_mode('plot')
-# tmap_mode('view')
+#tmap_mode('plot')
+tmap_mode('view')
 
 abronia_usa <- 
   tm_shape(usa) +

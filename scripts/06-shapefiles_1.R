@@ -9,16 +9,16 @@ library(tidyverse)
 
 #unzip shapefiles in shapefile folder. Keep the origin names
 
-# usa <- 
+# usa <-
 #   read_sf('shapefiles/cb_2018_us_state_500k.shp') |>
-#   st_make_valid() |> 
+#   st_make_valid() |>
 #   janitor::clean_names()
-
-# usa |> 
+# 
+# usa |>
 #   write_sf('shapefiles/usa.gpkg')
 # 
 # plot(st_geometry(usa))
-
+# 
 # counties <-
 #   read_sf('shapefiles/cb_2018_us_county_500k.shp') |>
 #    st_make_valid() |>

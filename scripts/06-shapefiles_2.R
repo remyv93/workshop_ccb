@@ -126,6 +126,7 @@ slope <-
   terrain(elevation_usa, "slope", unit="radians")
 
 plot(slope)
+plot(aspect)
 
 aspect <- 
   terrain(elevation_usa, "aspect", unit="radians")

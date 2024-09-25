@@ -89,8 +89,8 @@ derived_dataset_prep(
   citation_data = derived_data,
   title = 'Derived Dataset Abronia villosa',
   description = 'This dataset was filtered using CoordinateCleaner and scrubr and shows the distribution of Abronia villosa from 1980-2024',
-  source_url = 'https://github.com/hzumbado/ccc_workshop/tree/main/data/processed/abronia_gbif_clean.csv',
-  gbif_download_doi = '10.15468/dl.449ysg')
+  source_url = 'https://github.com/remyv93/workshop_ccb/tree/main/data/processed/abronia_gbif_clean.csv',
+  gbif_download_doi = '10.15468/dl.yqydua')
 
 # If output looks ok, run derived_dataset 
 
@@ -98,5 +98,7 @@ derived_dataset(
   citation_data = derived_data,
   title = 'Derived Dataset Abronia villosa',
   description = 'This dataset was filtered using CoordinateCleaner and scrubr and shows the distribution of Abronia villosa from 1980-2024',
-  source_url = 'https://github.com/hzumbado/ccc_workshop/tree/main/data/processed/abronia_gbif_clean.csv',
-  gbif_download_doi = '10.15468/dl.449ysg')
+  source_url = 'https://github.com/remyv93/workshop_ccb/tree/main/data/processed/abronia_gbif_clean.csv',
+  gbif_download_doi = '10.15468/dl.yqydua',
+  user = 'remyv',
+  pwd = 'Lupin3ar!')
